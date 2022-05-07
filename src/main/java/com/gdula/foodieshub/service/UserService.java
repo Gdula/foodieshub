@@ -50,15 +50,6 @@ public class UserService {
     }
 
     public UserDto updateUser(UpdateUserDto dto, String id) throws UserNotFound, UserDataInvalid {
-        if (dto.getName() == null || dto.getName().isEmpty() ||
-                dto.getSurname() == null || dto.getSurname().isEmpty() ||
-                dto.getPassword() == null || dto.getPassword().isEmpty() ||
-                dto.getAddress() == null || dto.getAddress().isEmpty() ||
-                dto.getCity() == null || dto.getCity().isEmpty() ||
-                dto.getZip() == null || dto.getZip().isEmpty()) {
-            throw new UserDataInvalid();
-        }
-
         User user = userRepository.findById(id).orElseThrow(UserNotFound::new);
 
         user.setName(dto.getName());

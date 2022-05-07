@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>FoodiesHub</title>
@@ -12,14 +12,13 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
 </head>
-
 <body>
 
 <header>
     <nav class="navbar navbar-dark navbar-expand-md">
 
         <a class="navbar-brand" href="/" id="logo-lettering"><img id="logo" th:src="@{/images/logo.png}" src="../static/images/logo.png"
-                                                                  width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">Fun Trade</a>
+                                                                  width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">FoodiesHub</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
                 aria-controls="main-menu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -66,59 +65,46 @@
 </header>
 
 <div id="center-form">
-    <h1>
-        Zarejestruj się
-    </h1>
-    <form action="#" th:action="@{/create-user}" th:object="${dto}" method="post">
-        <fieldset>
-            <legend for="login-field">Login: </legend>
-            <input type="text" id="login-field" th:field="*{login}">
 
-            <div style="color: red" th:if="${#fields.hasErrors('login')}">
-                Incorrect login (must be at least 3 characters long!
-            </div>
+    <h1>Przepisy</h1>
 
-
-            <legend for="name-field">Imię: </legend>
-            <input type="text" id="name-field" th:field="*{name}">
-            <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-
-
-
-            <legend for="surname-field">Nazwisko: </legend>
-            <input type="text" id="surname-field" th:field="*{surname}">
-            <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
-
-
-
-            <legend for="mail-field">Adres E-mail:</legend>
-            <input type="text" id="mail-field" th:field="*{mail}">
-            <div style="color: red" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></div>
-
-
-            <legend for="password-field">Hasło: </legend>
-            <input type="password" id="password-field" th:field="*{password}">
-            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-
-
-            <legend for="address-field">Adres: </legend>
-            <input type="text" id="address-field" th:field="*{address}">
-            <div style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
-
-
-            <legend for="city-field">Miasto: </legend>
-            <input type="text" id="city-field" th:field="*{city}">
-            <div style="color: red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
-
-
-            <legend for="zip-field">Kod pocztowy: </legend>
-            <input type="text" id="zip-field" th:field="*{zip}">
-            <div style="color: red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
-
-        </fieldset>
-
-        <input class="btn btn-dark" type="submit" value="Zarejestruj się">
+    <form th:action="@{/search-item}">
+        <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+        &nbsp;
+        <input type="submit" value="Szukaj" />
+        &nbsp;
+        <input type="button" value="Wyczyść" id="btnClear" onclick="clearSearch()" />
     </form>
+
+    <div id="form-list">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <td>Nazwa</td>
+                    <td>Trudność</td>
+                    <td>Opis</td>
+                    <td>Czas wykonania</td>
+                    <td>Kategoria</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="recipe:${recipes}">
+                    <td th:text="${recipe.name}"></td>
+                    <td th:text="${recipe.difficulty}"></td>
+                    <td th:text="${recipe.description}"></td>
+                    <td th:text="${recipe.minutesToPrepare}"></td>
+                    <td th:text="${recipe.category}"></td>
+                    <td><img alt="" th:src="*{'data:image/jpg;base64,'+ recipe.image}" style="width: 200px;"></td>
+                    <td id="custom-button">
+                        <a class="btn btn-light" th:href="'show-item/' + ${recipe.id}">Pokaż przedmiot</a>
+                        <a class="btn btn-light" th:href="'show-owner/' + ${recipe.id}">Wyświetl profil właściciela przedmiotu</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div id="footer">
@@ -128,5 +114,11 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/recipes}]]";
+    }
+</script>
+
 </body>
 </html>

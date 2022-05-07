@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>FoodiesHub</title>
@@ -13,13 +13,12 @@
           crossorigin="anonymous">
 </head>
 
-<body>
 
 <header>
     <nav class="navbar navbar-dark navbar-expand-md">
 
         <a class="navbar-brand" href="/" id="logo-lettering"><img id="logo" th:src="@{/images/logo.png}" src="../static/images/logo.png"
-                                                                  width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">Fun Trade</a>
+                                                                      width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">Fun Trade</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
                 aria-controls="main-menu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -67,57 +66,52 @@
 
 <div id="center-form">
     <h1>
-        Zarejestruj się
+        Stwórz nowy przepis
     </h1>
-    <form action="#" th:action="@{/create-user}" th:object="${dto}" method="post">
-        <fieldset>
-            <legend for="login-field">Login: </legend>
-            <input type="text" id="login-field" th:field="*{login}">
 
-            <div style="color: red" th:if="${#fields.hasErrors('login')}">
+    <form action="#" th:action="@{/create-recipe}" th:object="${dto}" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend for="name-field">Nazwa</legend>
+            <input type="text" id="name-field" th:field="*{name}">
+            <div style="color: red" th:if="${#fields.hasErrors('name')}">
                 Incorrect login (must be at least 3 characters long!
             </div>
 
+            <<legend for="difficulty-field">Trudność</legend>
+            <select id="difficulty-field" th:field="*{difficulty}">
+                <option th:each="c : ${difficultyList}" th:value="${c}" th:text="${c}"></option>
+            </select>
+            <div style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
 
-            <legend for="name-field">Imię: </legend>
-            <input type="text" id="name-field" th:field="*{name}">
-            <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            <legend for="description-field">Opis</legend>
+            <textarea type="text" id="description-field" th:field="*{description}"></textarea>
+            <div style="color: red" th:if="${#fields.hasErrors('description')}">
+                Incorrect description
+            </div>
 
+            <legend for="minutesToPrepare-field">Czas przygotowania</legend>
+            <textarea type="text" id="minutesToPrepare-field" th:field="*{minutesToPrepare}"></textarea>
+            <div style="color: red" th:if="${#fields.hasErrors('minutesToPrepare')}">
+                Incorrect minutes to prepare
+            </div>
 
+            <legend for="category-field">Kategoria</legend>
+            <select id="category-field" th:field="*{category}">
+                <option th:each="c : ${categoryList}" th:value="${c}" th:text="${c}"></option>
+            </select>
+            <div style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
 
-            <legend for="surname-field">Nazwisko: </legend>
-            <input type="text" id="surname-field" th:field="*{surname}">
-            <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+            <br>
 
-
-
-            <legend for="mail-field">Adres E-mail:</legend>
-            <input type="text" id="mail-field" th:field="*{mail}">
-            <div style="color: red" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></div>
-
-
-            <legend for="password-field">Hasło: </legend>
-            <input type="password" id="password-field" th:field="*{password}">
-            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-
-
-            <legend for="address-field">Adres: </legend>
-            <input type="text" id="address-field" th:field="*{address}">
-            <div style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
-
-
-            <legend for="city-field">Miasto: </legend>
-            <input type="text" id="city-field" th:field="*{city}">
-            <div style="color: red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
-
-
-            <legend for="zip-field">Kod pocztowy: </legend>
-            <input type="text" id="zip-field" th:field="*{zip}">
-            <div style="color: red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
+            <label for="image-field">Dodaj zdjęcie</label>
+            <input type="file" name="file" id="image-field">
+            <div style="color: red" th:if="${#fields.hasErrors('image')}">
+                Incorrect image
+            </div>
 
         </fieldset>
 
-        <input class="btn btn-dark" type="submit" value="Zarejestruj się">
+        <input class="btn btn-dark" type="submit" value="Stwórz">
     </form>
 </div>
 

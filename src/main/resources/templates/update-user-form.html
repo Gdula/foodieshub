@@ -17,7 +17,7 @@
 <header>
     <nav class="navbar navbar-dark navbar-expand-md">
 
-        <a class="navbar-brand" href="/" id="logo-lettering"><img id="logo" th:src="@{/static/images/logo.png}" src="../static/images/logo.png"
+        <a class="navbar-brand" href="/" id="logo-lettering"><img id="logo" th:src="@{/images/logo.png}" src="../static/images/logo.png"
                                                                   width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">FoodiesHub</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
@@ -38,14 +38,14 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> Przedmioty </a>
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> Przepisy </a>
 
                     <div class="dropdown-menu">
 
-                        <a class="dropdown-item" href="/items"> Wyświetl przedmioty </a>
+                        <a class="dropdown-item" href="/recipes"> Wyświetl przepisy </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/create-item"> Stwórz Przedmiot </a>
-                        <a class="dropdown-item" href="/my-items"> Wyświetl moje przedmioty </a>
+                        <a class="dropdown-item" href="/create-recipe"> Stwórz przepis </a>
+                        <a class="dropdown-item" href="/my-recipes"> Wyświetl moje przepisy </a>
 
                     </div>
 
@@ -110,12 +110,11 @@
 </div>
 
 <div id="footer">
-    <p>Daniel Gdula 2020 © Wszelkie prawa zastrzeżone.</p>
+    <p>Daniel Gdula 2022 © Wszelkie prawa zastrzeżone.</p>
 </div>
 
-<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
