@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<thead>
     <title>FoodiesHub</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-</head>
+</thead>
 
-
+<body>
 <header>
     <nav class="navbar navbar-dark navbar-expand-md">
 
@@ -99,7 +99,25 @@
             <i class="fa-regular fa-plus"></i>
             <button type="submit" class="btn-add"></button>
             -->
+            <legend for="ingredients-field">Składniki</legend>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Ilość</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ingredient, itemStat : *{ingredients}">
+                    <td><input th:field="*{ingredients[__${itemStat.index}__].name}"/></td>
+                    <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}"/></td>
+                </tr>
+                </tbody>
 
+            </table>
+
+
+            <!--
             <div class="input-group">
                 <td><input type="text" class="form-control" id="candidate" name="ingredients" th:field="*{ingredients}"></td>
                 <div class="input-group-append">
@@ -107,10 +125,7 @@
                     <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
                 </div>
             </div>
-
-
-
-            </ul>
+            -->
 
             <legend for="category-field">Kategoria</legend>
             <select id="category-field" th:field="*{category}">

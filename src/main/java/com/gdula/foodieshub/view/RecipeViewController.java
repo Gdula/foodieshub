@@ -1,5 +1,6 @@
 package com.gdula.foodieshub.view;
 
+import com.gdula.foodieshub.model.Ingredient;
 import com.gdula.foodieshub.model.Recipe;
 import com.gdula.foodieshub.service.RecipeService;
 import com.gdula.foodieshub.service.dto.CreateUpdateRecipeDto;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +42,12 @@ public class RecipeViewController {
     @GetMapping("/create-recipe")
     public String displayCreateRecipeForm(Model model) {
         CreateUpdateRecipeDto dto = new CreateUpdateRecipeDto();
+        dto.setIngredients(new ArrayList<>());
+
+        for (int i = 1; i <= 3; i++) {
+            dto.addIngredient(new Ingredient());
+        }
+
         model.addAttribute("difficultyList", Arrays.asList(Recipe.Difficulty.values()));
         model.addAttribute("categoryList", Arrays.asList(Recipe.Category.values()));
         model.addAttribute("dto", dto);

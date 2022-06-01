@@ -1,7 +1,9 @@
 package com.gdula.foodieshub.service;
 
+import com.gdula.foodieshub.model.Ingredient;
 import com.gdula.foodieshub.model.Recipe;
 import com.gdula.foodieshub.model.User;
+import com.gdula.foodieshub.repository.IngredientRepository;
 import com.gdula.foodieshub.repository.RecipeRepository;
 import com.gdula.foodieshub.repository.UserRepository;
 import com.gdula.foodieshub.service.dto.CreateUpdateRecipeDto;
@@ -26,6 +28,9 @@ import java.util.stream.Collectors;
 public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    private IngredientRepository ingredientRepository;
     @Autowired
     private RecipeDtoMapper recipeDtoMapper;
     @Autowired
@@ -49,8 +54,9 @@ public class RecipeService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Iterable<Ingredient> savedIngredients = ingredientRepository.saveAll(recipeToSave.getIngredients());
         Recipe savedItem = recipeRepository.save(recipeToSave);
+
         return recipeDtoMapper.toDto(savedItem);
     }
 

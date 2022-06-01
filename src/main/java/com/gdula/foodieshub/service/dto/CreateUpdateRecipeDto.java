@@ -43,4 +43,8 @@ public class CreateUpdateRecipeDto {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
 }
