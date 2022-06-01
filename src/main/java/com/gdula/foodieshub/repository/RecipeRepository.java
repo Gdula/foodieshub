@@ -12,7 +12,7 @@ import java.util.List;
 public interface RecipeRepository extends CrudRepository<Recipe, String> {
     List<Recipe> findAll();
     List<Recipe> findAllByIdIn(List<String> itemIds);
-
+    Recipe findFirstById(String id);
     @Query("SELECT i FROM Recipe i WHERE i.name LIKE %?1%")
     List<Recipe> findAllWithKeyword(String keyword);
 }

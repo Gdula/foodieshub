@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -75,7 +76,7 @@
                 Incorrect login (must be at least 3 characters long!
             </div>
 
-            <<legend for="difficulty-field">Trudność</legend>
+            <legend for="difficulty-field">Trudność</legend>
             <select id="difficulty-field" th:field="*{difficulty}">
                 <option th:each="c : ${difficultyList}" th:value="${c}" th:text="${c}"></option>
             </select>
@@ -92,6 +93,24 @@
             <div style="color: red" th:if="${#fields.hasErrors('minutesToPrepare')}">
                 Incorrect minutes to prepare
             </div>
+            <!--
+            <legend for="name-field">Dodaj składniki</legend>
+            <input type="text" name="ingredients" th:field="*{ingredients}">
+            <i class="fa-regular fa-plus"></i>
+            <button type="submit" class="btn-add"></button>
+            -->
+
+            <div class="input-group">
+                <td><input type="text" class="form-control" id="candidate" name="ingredients" th:field="*{ingredients}"></td>
+                <div class="input-group-append">
+                    <button onclick="addItem()" class="btn btn-add" type="button">Dodaj składnik</button>
+                    <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
+                </div>
+            </div>
+
+
+
+            </ul>
 
             <legend for="category-field">Kategoria</legend>
             <select id="category-field" th:field="*{category}">
@@ -102,6 +121,7 @@
             <br>
 
             <label for="image-field">Dodaj zdjęcie</label>
+            <br>
             <input type="file" name="file" id="image-field">
             <div style="color: red" th:if="${#fields.hasErrors('image')}">
                 Incorrect image
@@ -116,7 +136,7 @@
 <div id="footer">
     <p>Daniel Gdula 2022 © Wszelkie prawa zastrzeżone.</p>
 </div>
-
+<script src="/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

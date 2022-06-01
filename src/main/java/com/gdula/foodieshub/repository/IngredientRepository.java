@@ -14,5 +14,5 @@ public interface IngredientRepository extends CrudRepository<Ingredient, String>
     List<Ingredient> findAllByIdIn(List<String> itemIds);
 
     @Query("SELECT i FROM Ingredient i WHERE i.name LIKE %?1%")
-    List<Recipe> findAllWithKeyword(String keyword);
+    List<Ingredient> findAllWithKeyword(String keyword);
 }

@@ -3,6 +3,6 @@ package com.gdula.foodieshub.service.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.BAD_REQUEST)
-public class RecipeDataInvalid extends Exception{
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class IngredientNotFound extends Exception{
 }

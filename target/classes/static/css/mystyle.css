@@ -131,6 +131,49 @@ tr
   color: black;
 }
 
+h1 {
+    color: rgb(49, 49, 49);
+    margin-top: 40px;
+    text-align: center;
+    font-size: 32px;
+}
 
 
+.input-group input{
+    margin-left: 600px;
 
+}
+
+
+.btn-add {
+    background-color: rgb(12, 187, 50);
+    color: white;
+
+
+}
+
+.btn-remove {
+    background-color: rgb(187, 12, 12);
+    color: white;
+    margin-right: 600px;
+}
+
+#dynamic-list {
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0px;
+    margin-bottom: 0;
+}
+
+.ingredient {
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid rgb(163, 163, 163);
+    border-radius: .25rem;
+
+}

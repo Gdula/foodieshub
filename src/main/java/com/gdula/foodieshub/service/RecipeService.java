@@ -58,7 +58,7 @@ public class RecipeService {
     private boolean isRecipeValid(CreateUpdateRecipeDto dto) {
         return dto.getName() != null && !dto.getName().isEmpty() && dto.getDifficulty() != null &&
                 dto.getDescription() != null && !dto.getDescription().isEmpty() && dto.getMinutesToPrepare() != null &&
-                dto.getCategory() != null && dto.getImage() != null && dto.getOwner() != null && dto.getIngredients() != null;
+                dto.getCategory() != null && dto.getIngredients() != null;
     }
 
     public RecipeDto updateRecipe(CreateUpdateRecipeDto dto, String id) throws RecipeNotFound, RecipeDataInvalid {

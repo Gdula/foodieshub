@@ -1,5 +1,6 @@
-package com.gdula.foodieshub.model;
+package com.gdula.foodieshub.service.dto;
 
+import com.gdula.foodieshub.model.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +10,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
-public class Ingredient {
+public class IngredientDto {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
