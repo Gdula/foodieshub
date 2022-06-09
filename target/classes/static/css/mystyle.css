@@ -1,6 +1,5 @@
 html {
     height: 100%;
-
 }
 
 body
@@ -138,14 +137,8 @@ h1 {
     font-size: 32px;
 }
 
-
-.input-group input{
-    margin-left: 600px;
-
-}
-
-
 .btn-add {
+
     background-color: rgb(12, 187, 50);
     color: white;
 
@@ -153,9 +146,9 @@ h1 {
 }
 
 .btn-remove {
+
     background-color: rgb(187, 12, 12);
     color: white;
-    margin-right: 600px;
 }
 
 #dynamic-list {
@@ -176,4 +169,26 @@ h1 {
     border: 1px solid rgb(163, 163, 163);
     border-radius: .25rem;
 
+}
+
+.ingredients {
+    margin-left: auto;
+
+}
+
+.input-group-append {
+    margin-right: auto;
+}
+
+fieldset {
+    display: inline-block;
+    background-color:blanchedalmond !important;
+    border:2px groove ;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+}
+
+label {
+    color: black;
 }

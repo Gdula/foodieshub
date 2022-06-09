@@ -2,6 +2,7 @@ package com.gdula.foodieshub.view;
 
 import com.gdula.foodieshub.model.Ingredient;
 import com.gdula.foodieshub.model.Recipe;
+import com.gdula.foodieshub.service.IngredientService;
 import com.gdula.foodieshub.service.RecipeService;
 import com.gdula.foodieshub.service.dto.CreateUpdateRecipeDto;
 import com.gdula.foodieshub.service.dto.RecipeDto;
@@ -19,9 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Controller
 public class RecipeViewController {
@@ -29,6 +31,8 @@ public class RecipeViewController {
     private RecipeService recipeService;
     @Autowired
     private RecipeDtoMapper recipeDtoMapper;
+    @Autowired
+    private IngredientService ingredientService;
 
     @GetMapping("/recipes")
     public ModelAndView displayRecipesTable() {
@@ -43,10 +47,7 @@ public class RecipeViewController {
     public String displayCreateRecipeForm(Model model) {
         CreateUpdateRecipeDto dto = new CreateUpdateRecipeDto();
         dto.setIngredients(new ArrayList<>());
-
-        for (int i = 1; i <= 3; i++) {
-            dto.addIngredient(new Ingredient());
-        }
+        dto.addIngredient(new Ingredient());
 
         model.addAttribute("difficultyList", Arrays.asList(Recipe.Difficulty.values()));
         model.addAttribute("categoryList", Arrays.asList(Recipe.Category.values()));
@@ -76,13 +77,33 @@ public class RecipeViewController {
     public ModelAndView displayRecipe(@PathVariable String id) {
         try {
             RecipeDto recipeById = recipeService.getRecipeById(id);
+
+            List<Ingredient> ingredients = recipeById.getIngredients();
+
+            Map<String, String> ingredientsNamesQuantities = getIngredientsMap(ingredients);
+
             ModelAndView mav = new ModelAndView("show-recipe");
             mav.addObject("recipe", recipeById);
+            mav.addObject("ingredientsNamesQuantities", ingredientsNamesQuantities);
+
             return mav;
         } catch (RecipeNotFound e) {
             e.printStackTrace();
             return new ModelAndView("redirect:/recipes");
         }
+    }
+
+    private Map<String, String> getIngredientsMap(List<Ingredient> ingredients) {
+        List<String> ingredientsNames = Stream.of(ingredients.get(0).getName().split(",", -1))
+                .collect(Collectors.toList());
+        List<String> ingredientsQuantities = Stream.of(ingredients.get(0).getQuantity().split(",", -1))
+                .collect(Collectors.toList());
+        return zipToMap(ingredientsNames, ingredientsQuantities);
+    }
+
+    public static <K, V> Map<K, V> zipToMap(List<K> keys, List<V> values) {
+        return IntStream.range(0, keys.size()).boxed()
+                .collect(Collectors.toMap(keys::get, values::get));
     }
 
     @GetMapping("/delete-recipe/{id}")
@@ -126,7 +147,7 @@ public class RecipeViewController {
     @GetMapping("/my-recipes")
     public ModelAndView showLoggedUserRecipes() {
         List<RecipeDto> userRecipes = recipeService.getLoggedUserRecipes();
-        ModelAndView mav = new ModelAndView("logged-user-recipes-table");
+        ModelAndView mav = new ModelAndView("user-recipes-table");
         mav.addObject("recipes", userRecipes);
 
         return mav;

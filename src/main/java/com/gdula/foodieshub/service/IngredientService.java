@@ -11,6 +11,7 @@ import com.gdula.foodieshub.service.dto.IngredientDto;
 import com.gdula.foodieshub.service.dto.RecipeDto;
 import com.gdula.foodieshub.service.exception.IngredientDataInvalid;
 import com.gdula.foodieshub.service.exception.IngredientNotFound;
+import com.gdula.foodieshub.service.exception.RecipeNotFound;
 import com.gdula.foodieshub.service.mapper.IngredientDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ public class IngredientService {
     private UserRepository userRepository;
     @Autowired
     private SecurityUtils securityUtils;
+    @Autowired
+    private RecipeService recipeService;
 
     public IngredientDto createIngredient(CreateUpdateIngredientDto dto) throws IngredientDataInvalid {
         if (!isIngredientValid(dto)) {
@@ -86,6 +89,14 @@ public class IngredientService {
                     .stream()
                     .map(i -> ingredientDtoMapper.toDto(i))
                     .collect(Collectors.toList());
+    }
+
+    public List<IngredientDto> getIngredientsByRecipeId(String id) throws RecipeNotFound {
+        return recipeService.getRecipeById(id)
+                .getIngredients()
+                .stream()
+                .map(i -> ingredientDtoMapper.toDto(i))
+                .collect(Collectors.toList());
     }
 
     boolean isIngredientValid(CreateUpdateIngredientDto dto) {

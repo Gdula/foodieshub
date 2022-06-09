@@ -95,8 +95,8 @@
                     <td th:text="${recipe.category}"></td>
                     <td><img alt="" th:src="*{'data:image/jpg;base64,'+ recipe.image}" style="width: 200px;"></td>
                     <td id="custom-button">
-                        <a class="btn btn-light" th:href="'show-item/' + ${recipe.id}">Pokaż przedmiot</a>
-                        <a class="btn btn-light" th:href="'show-owner/' + ${recipe.id}">Wyświetl profil właściciela przedmiotu</a>
+                        <a class="btn btn-light" th:href="'show-recipe/' + ${recipe.id}">Pokaż przepis</a>
+                        <a class="btn btn-light" th:href="'show-owner/' + ${recipe.id}">Wyświetl profil właściciela przepisu</a>
                     </td>
                 </tr>
             </tbody>

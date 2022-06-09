@@ -64,12 +64,11 @@
 </header>
 
 <div id="center-form">
-    <h1>
-        Stwórz nowy przepis
-    </h1>
+
 
     <form action="#" th:action="@{/create-recipe}" th:object="${dto}" method="post" enctype="multipart/form-data">
         <fieldset>
+            <legend for="name-field">Stwórz nowy przepis</legend>
             <legend for="name-field">Nazwa</legend>
             <input type="text" id="name-field" th:field="*{name}">
             <div style="color: red" th:if="${#fields.hasErrors('name')}">
@@ -99,23 +98,54 @@
             <i class="fa-regular fa-plus"></i>
             <button type="submit" class="btn-add"></button>
             -->
+
             <legend for="ingredients-field">Składniki</legend>
+            <div class="input-group ingredient_single">
+
             <table>
                 <thead>
                     <tr>
-                        <th>Nazwa</th>
-                        <th>Ilość</th>
+
                     </tr>
                 </thead>
                 <tbody>
+                <div class="ingredients">
                 <tr th:each="ingredient, itemStat : *{ingredients}">
                     <td><input th:field="*{ingredients[__${itemStat.index}__].name}"/></td>
                     <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}"/></td>
                 </tr>
+                </div>
                 </tbody>
 
             </table>
+                <div class="input-group-append">
+                    <button onclick="addItem()" class="btn btn-add" type="button">Dodaj składnik</button>
+                    <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
+                </div>
+            </div>
+            <!--
+            <div class="input-group ingredient_single">
+                <div class="input-group-append">
+                    <button onclick="addItem()" class="btn btn-add" type="button">Dodaj składnik</button>
+                    <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Ilość</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ingredient, itemStat : *{ingredients}">
 
+                        <td><input th:field="*{ingredients[__${itemStat.index}__].name}"/></td>
+                        <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            -->
 
             <!--
             <div class="input-group">

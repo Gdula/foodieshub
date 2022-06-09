@@ -1,16 +1,17 @@
 function addItem() {
-    var ul = document.getElementById("dynamic-list");
-    var candidate = document.getElementById("candidate");
-    var li = document.createElement("li");
-    li.className = "ingredient";
-    li.setAttribute('id', candidate.value);
-    li.appendChild(document.createTextNode(candidate.value));
-    ul.appendChild(li);
+    var lastIngredientSingleList = document.getElementsByClassName('ingredient_single');//pobierasz wszystkie już istniejące elementy do składników
+    var lastIngredientSingle = lastIngredientSingleList[lastIngredientSingleList.length-1];//wynajdujesz sobie ostatni
+
+//kopiujesz go
+    var clonedIngredientSingle = lastIngredientSingle.cloneNode(true);
+
+//wklejasz za ostatni
+    lastIngredientSingle.parentNode.insertBefore(clonedIngredientSingle, lastIngredientSingle.nextSibling);
 }
 
 function removeItem() {
-    var ul = document.getElementById("dynamic-list");
-    var candidate = document.getElementById("candidate");
-    var item = document.getElementById(candidate.value);
-    ul.removeChild(item);
+    var lastIngredientSingleList = document.getElementsByClassName('ingredient_single');//pobierasz wszystkie już istniejące elementy do składników
+    var lastIngredientSingle = lastIngredientSingleList[lastIngredientSingleList.length-1];//wynajdujesz sobie ostatni
+
+    lastIngredientSingle.remove();
 }

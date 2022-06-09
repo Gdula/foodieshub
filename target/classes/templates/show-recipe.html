@@ -64,14 +64,35 @@
 <div id="center-form">
     <fieldset>
         <legend></legend>
-        <h1 th:text="${user.login}"></h1>
-        <legend>Imię</legend>
-        <h2 th:text="${user.name}"></h2>
-        <legend>Nazwisko</legend>
-        <p th:text="${user.surname}"></p>
-        <legend>Miasto</legend>
-        <p th:text="${user.city}"></p>
-        <a class="btn btn-light" th:href="'/user-items-table/' + ${user.id}">Pokaż przepisy</a>
+        <h1 th:text="${recipe.name}"></h1>
+
+        <img alt="" th:src="*{'data:image/jpg;base64,'+ recipe.image}" style="width: 400px;">
+
+        <legend>Poziom trudności</legend>
+        <p th:text="${recipe.difficulty}"></p>
+
+        <legend>Kategoria</legend>
+        <p th:text="${recipe.category}"></p>
+
+        <legend>Składniki</legend>
+        <tr th:each="name:${ingredientNames}">
+            <td th:text="${name}"></td>
+        </tr>
+
+        <tr th:each="ingredient:${ingredientsNamesQuantities}">
+            <td th:text="${ingredient.key}"></td>
+            <td th:text="${ingredient.value}"></td>
+            <br/>
+        </tr>
+        <legend>Opis</legend>
+        <p th:text="${recipe.description}"></p>
+
+        <legend>Czas przygotowania</legend>
+        <p th:text="${recipe.minutesToPrepare} +  minut"></p>
+
+        <div id="custom-button">
+            <a class="btn btn-dark" th:href="'/show-owner/' + ${recipe.id}">Wyświetl profil właściciela przepisu</a>
+        </div>
     </fieldset>
 </div>
 

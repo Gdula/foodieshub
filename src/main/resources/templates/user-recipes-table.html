@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>FoodiesHub</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-dark navbar-expand-md">
+
+    <a class="navbar-brand" href="/" id="logo-lettering"><img id="logo" th:src="@{/images/fh_logo_white.png}" src="../static/images/fh_logo_white.png"
+                                                              width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">FoodiesHub</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+            aria-controls="main-menu" aria-expanded="false" aria-label="Przełącznik nawigacji">
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="main-menu">
+
+      <ul class="navbar-nav">
+        <li class="navbar-item">
+          <a class="nav-link" href="/"> Start </a>
+        </li>
+
+        <li class="navbar-item">
+          <a class="nav-link" href="/users"> Użytkownicy </a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"> Przepisy </a>
+
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" href="/recipes"> Wyświetl przepisy </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/create-recipe"> Stwórz przepisy </a>
+            <a class="dropdown-item" href="/my-recipes"> Wyświetl moje przepisy </a>
+
+          </div>
+
+        </li>
+
+        <li class="navbar-item">
+          <a class="nav-link" href="/login.html"> Zaloguj się </a>
+        </li>
+
+        <li class="navbar-item">
+          <a class="nav-link" href="/create-user"> Zarejestruj się </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div id="center-form">
+  <h1>Użytkownicy</h1>
+
+  <form th:action="@{/search-user}">
+    <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+    &nbsp;
+    <input class="btn btn-light" type="submit" value="Szukaj" />
+    &nbsp;
+    <input class="btn btn-light" type="button" value="Wyczyść" id="btnClear" onclick="clearSearch()" />
+  </form>
+
+
+
+    <h1>Przedmioty</h1>
+    <div id="form-list">
+      <table class="table table-dark">
+        <thead>
+        <tr>
+          <td>Nazwa</td>
+          <td>Cena</td>
+          <td>Kategoria</td>
+          <td>Stan</td>
+          <td>Zdjęcie</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipe:${recipes}">
+          <td th:text="${recipe.name}"></td>
+          <td th:text="${recipe.difficulty}"></td>
+          <td th:text="${recipe.minutesToPrepare}"></td>
+          <td th:text="${recipe.category}"></td>
+          <td><img alt="" th:src="*{'data:image/jpg;base64,'+ recipe.image}" style="width: 200px;"></td>
+          <td id="custom-button">
+            <a class="btn btn-light" th:href="'/show-recipe/' + ${recipe.id}">Pokaż przepis</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<div id="footer">
+  <p>Daniel Gdula 2022 © Wszelkie prawa zastrzeżone.</p>
+</div>
+
+<script type="text/javascript">
+  function clearSearch() {
+    window.location = "[[@{/users}]]";
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
