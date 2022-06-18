@@ -67,19 +67,29 @@ public class RecipeService {
                 dto.getCategory() != null && dto.getIngredients() != null;
     }
 
-    public RecipeDto updateRecipe(CreateUpdateRecipeDto dto, String id) throws RecipeNotFound, RecipeDataInvalid {
+    public RecipeDto updateRecipe(CreateUpdateRecipeDto dto, String id, MultipartFile file) throws RecipeNotFound, RecipeDataInvalid {
         if (!isRecipeValid(dto))
             throw new RecipeDataInvalid();
 
         Recipe recipe = recipeRepository.findById(id).orElseThrow(RecipeNotFound::new);
 
+        User owner = userRepository.findFirstByLogin(securityUtils.getUserName());
+        recipe.setOwner(owner);
+
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        System.out.println(fileName);
+        try {
+            recipe.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         recipe.setName(dto.getName());
         recipe.setDifficulty(dto.getDifficulty());
         recipe.setDescription(dto.getDescription());
         recipe.setCategory(dto.getCategory());
         recipe.setMinutesToPrepare(dto.getMinutesToPrepare());
         recipe.setImage(dto.getImage());
-        recipe.setIngredients(dto.getIngredients());
+        Iterable<Ingredient> savedIngredients = ingredientRepository.saveAll(recipe.getIngredients());
         Recipe savedRecipe = recipeRepository.save(recipe);
 
         return recipeDtoMapper.toDto(savedRecipe);

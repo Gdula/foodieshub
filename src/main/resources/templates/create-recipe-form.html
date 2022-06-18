@@ -92,21 +92,13 @@
             <div style="color: red" th:if="${#fields.hasErrors('minutesToPrepare')}">
                 Incorrect minutes to prepare
             </div>
-            <!--
-            <legend for="name-field">Dodaj składniki</legend>
-            <input type="text" name="ingredients" th:field="*{ingredients}">
-            <i class="fa-regular fa-plus"></i>
-            <button type="submit" class="btn-add"></button>
-            -->
 
             <legend for="ingredients-field">Składniki</legend>
             <div class="input-group ingredient_single">
 
             <table>
                 <thead>
-                    <tr>
-
-                    </tr>
+                    <tr></tr>
                 </thead>
                 <tbody>
                 <div class="ingredients">
@@ -123,39 +115,6 @@
                     <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
                 </div>
             </div>
-            <!--
-            <div class="input-group ingredient_single">
-                <div class="input-group-append">
-                    <button onclick="addItem()" class="btn btn-add" type="button">Dodaj składnik</button>
-                    <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Ilość</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="ingredient, itemStat : *{ingredients}">
-
-                        <td><input th:field="*{ingredients[__${itemStat.index}__].name}"/></td>
-                        <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            -->
-
-            <!--
-            <div class="input-group">
-                <td><input type="text" class="form-control" id="candidate" name="ingredients" th:field="*{ingredients}"></td>
-                <div class="input-group-append">
-                    <button onclick="addItem()" class="btn btn-add" type="button">Dodaj składnik</button>
-                    <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
-                </div>
-            </div>
-            -->
 
             <legend for="category-field">Kategoria</legend>
             <select id="category-field" th:field="*{category}">
@@ -171,10 +130,10 @@
             <div style="color: red" th:if="${#fields.hasErrors('image')}">
                 Incorrect image
             </div>
-
+            <input class="btn btn-dark" type="submit" value="Stwórz">
         </fieldset>
 
-        <input class="btn btn-dark" type="submit" value="Stwórz">
+
     </form>
 </div>
 

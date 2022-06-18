@@ -62,28 +62,30 @@
 </header>
 
 <div id="center-form">
-  <h1>Użytkownicy</h1>
+
+  <h1>Moje przepisy</h1>
 
   <form th:action="@{/search-user}">
     <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
     &nbsp;
-    <input class="btn btn-light" type="submit" value="Szukaj" />
+    <input class="btn btn-dark" type="submit" value="Szukaj" />
     &nbsp;
-    <input class="btn btn-light" type="button" value="Wyczyść" id="btnClear" onclick="clearSearch()" />
+    <input class="btn btn-dark" type="button" value="Wyczyść" id="btnClear" onclick="clearSearch()" />
   </form>
 
 
 
-    <h1>Przedmioty</h1>
+
     <div id="form-list">
-      <table class="table table-dark">
+      <table class="table table-warning">
         <thead>
         <tr>
           <td>Nazwa</td>
-          <td>Cena</td>
+          <td>Trudność</td>
+          <td>Czas wykonania</td>
           <td>Kategoria</td>
-          <td>Stan</td>
           <td>Zdjęcie</td>
+          <td></td>
         </tr>
         </thead>
         <tbody>
@@ -94,7 +96,9 @@
           <td th:text="${recipe.category}"></td>
           <td><img alt="" th:src="*{'data:image/jpg;base64,'+ recipe.image}" style="width: 200px;"></td>
           <td id="custom-button">
-            <a class="btn btn-light" th:href="'/show-recipe/' + ${recipe.id}">Pokaż przepis</a>
+            <a class="btn btn-dark" th:href="'/show-recipe/' + ${recipe.id}">Pokaż przepis</a>
+            <a class="btn btn-primary" th:href="'/update-recipe/' + ${recipe.id}">Zaktualizuj przepis</a>
+            <a class="btn btn-danger" th:href="'/delete-recipe/' + ${recipe.id}">Usuń przepis</a>
           </td>
         </tr>
         </tbody>

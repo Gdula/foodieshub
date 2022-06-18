@@ -49,7 +49,7 @@ body
 .welcome-header
 {
     text-align: center;
-    background-color: blanchedalmond;
+    background-color: #ffeeba;
 }
 
 #hi-1
@@ -85,7 +85,7 @@ body
 
 #center-form
 {
-    padding-top: 50px;
+    padding-top: 20px;
     text-align: center;
 }
 
@@ -100,8 +100,8 @@ body
 {
     padding-top: 20px;
     text-align: center;
-    color: white;
-
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .table-center
@@ -109,25 +109,21 @@ body
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
-    background-color: black;
+    color: black;
     border-radius: 5px;
 }
 
-td
+td, td, table
 {
-    border: 3px solid white;
+    border: 3px solid black;
     margin: 4px;
     border-radius: 5px;
 }
 
-tr
-{
-    border-radius: 5px;
-}
 
 #custom-button
 {
-  color: black;
+  color: white;
 }
 
 h1 {
@@ -191,4 +187,9 @@ fieldset {
 
 label {
     color: black;
+}
+
+.btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

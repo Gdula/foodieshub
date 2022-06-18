@@ -114,7 +114,7 @@ public class RecipeViewController {
             e.printStackTrace();
         }
 
-        return "redirect:/recipes";
+        return "redirect:/my-recipes";
     }
 
     @GetMapping("/update-recipe/{id}")
@@ -135,12 +135,14 @@ public class RecipeViewController {
     }
 
     @PostMapping("/update-recipe/{id}")
-    public String updateRecipe(@ModelAttribute CreateUpdateRecipeDto dto, @PathVariable String id) {
+    public String updateRecipe(@ModelAttribute CreateUpdateRecipeDto dto, @PathVariable String id,
+                               @RequestParam("file") MultipartFile file) {
         try {
-            recipeService.updateRecipe(dto, id);
-            return "redirect:/recipes";
+            recipeService.updateRecipe(dto, id, file);
+            return "redirect:/my-recipes";
         } catch (RecipeNotFound | RecipeDataInvalid e) {
-            return "redirect:/update-recipe/" + id;
+            e.printStackTrace();
+            return "redirect:/my-recipes";
         }
     }
 

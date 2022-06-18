@@ -63,11 +63,16 @@
 </header>
 
 <div id="center-form">
-    <h1>
-        Zarejestruj się
-    </h1>
+
     <form action="#" th:action="@{/create-user}" th:object="${dto}" method="post">
+
         <fieldset>
+            <legend>
+
+            </legend>
+            <legend>
+                Zarejestruj się
+            </legend>
             <legend for="login-field">Login: </legend>
             <input type="text" id="login-field" th:field="*{login}">
 
@@ -94,8 +99,14 @@
 
 
             <legend for="password-field">Hasło: </legend>
-            <input type="password" id="password-field" th:field="*{password}">
+            <input type="password" id="password-field" th:field="*{password}" onkeyup='check();'>
             <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
+            <br>
+
+            <legend>Potwierdź hasło:</legend>
+                <input type="password" name="confirm_password" id="confirm_password"  onkeyup='check();' />
+                <span id='message'></span>
 
 
             <legend for="address-field">Adres: </legend>
@@ -111,16 +122,20 @@
             <legend for="zip-field">Kod pocztowy: </legend>
             <input type="text" id="zip-field" th:field="*{zip}">
             <div style="color: red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
+            <br>
 
+            <input class="btn btn-dark" type="submit" value="Zarejestruj się">
         </fieldset>
 
-        <input class="btn btn-dark" type="submit" value="Zarejestruj się">
+
 <div id="footer">
     <p>Daniel Gdula 2022 © Wszelkie prawa zastrzeżone.</p>
 </div>
 
     </form>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

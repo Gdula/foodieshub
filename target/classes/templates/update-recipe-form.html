@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <thead>
-    <title>FoodiesHub</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>FoodiesHub</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/mystyle.css}" href="../static/css/mystyle.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nova+Square&family=Ubuntu&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </thead>
 
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-dark navbar-expand-md">
 
         <a class="navbar-brand" href="/" id="logo-lettering"><img id="logo" th:src="@{/images/fh_logo_white.png}" src="../static/images/fh_logo_white.png"
-                                                                      width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">FoodiesHub</a>
+                                                                  width="30" height="30" class="d-inline-block mr-1 align-bottom" alt="logo">FoodiesHub</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
                 aria-controls="main-menu" aria-expanded="false" aria-label="Przełącznik nawigacji">
@@ -64,11 +64,10 @@
 </header>
 
 <div id="center-form">
-
-
-    <form action="#" th:action="@{/create-recipe}" th:object="${dto}" method="post" enctype="multipart/form-data">
+    <form action="#" th:action="@{/update-recipe/{id}(id=${id})}" th:object="${dto}" method="post" enctype="multipart/form-data">
         <fieldset>
-            <legend for="name-field">Stwórz nowy przepis</legend>
+            <legend></legend>
+            <legend for="name-field">Zaktualizuj przepis</legend>
             <legend for="name-field">Nazwa</legend>
             <input type="text" id="name-field" th:field="*{name}">
             <div style="color: red" th:if="${#fields.hasErrors('name')}">
@@ -96,20 +95,22 @@
             <legend for="ingredients-field">Składniki</legend>
             <div class="input-group ingredient_single">
 
-            <table>
-                <thead>
-                    <tr></tr>
-                </thead>
-                <tbody>
-                <div class="ingredients">
-                <tr th:each="ingredient, itemStat : *{ingredients}">
-                    <td><input th:field="*{ingredients[__${itemStat.index}__].name}"/></td>
-                    <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}"/></td>
-                </tr>
-                </div>
-                </tbody>
+                <table>
+                    <thead>
+                    <tr>
 
-            </table>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div class="ingredients">
+                        <tr th:each="ingredient, itemStat : *{ingredients}">
+                            <td><input th:field="*{ingredients[__${itemStat.index}__].name}"/></td>
+                            <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}"/></td>
+                        </tr>
+                    </div>
+                    </tbody>
+
+                </table>
                 <div class="input-group-append">
                     <button onclick="addItem()" class="btn btn-add" type="button">Dodaj składnik</button>
                     <button onclick="removeItem()" class="btn btn-remove" type="button">Usuń składnik</button>
@@ -130,7 +131,7 @@
             <div style="color: red" th:if="${#fields.hasErrors('image')}">
                 Incorrect image
             </div>
-            <input class="btn btn-dark" type="submit" value="Stwórz">
+            <input class="btn btn-dark" type="submit" value="Zaktualizuj przepis">
         </fieldset>
 
 
